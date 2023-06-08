@@ -29,9 +29,13 @@ const io = new Server(server, {
   pingTimeout: 60000,
 } as ServerOptions);
 
-io.of("/socket.io").on("connection", (socket) => {
+io.of("/socket.io").on("connection", async (socket) => {
   console.log("Connected to socket.io");
-  socket.emit('message','hello');
-  socket.emit('message','How are you?');
-  socket.emit('message','How can we help you?');
+  
+  socket.on("join chat", async () => {
+    socket.emit('message','Hello How are you?');
+    socket.emit('message','Hello How are you?');
+    socket.emit('message','Hello How are you?');
+  });
 });
+

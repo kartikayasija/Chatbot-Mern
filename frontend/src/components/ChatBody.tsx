@@ -1,18 +1,15 @@
-import { useContext } from "react";
+import { useContext,useEffect,useState } from "react";
 import { MessageContext } from "../context/MessageContext";
 
 const ChatBody: React.FC = () => {
-  // const messages = [
-  //   { content: "Hello!", type: "incoming" },
-  //   { content: "Hi there!", type: "outgoing" },
-  //   { content: "How are you?", type: "incoming" },
-  // ];
 
-  const {messages} = useContext(MessageContext)
+  const {messages} = useContext(MessageContext);
+
   return (
     <div className="chat-body">
       {messages.map((message, index) => {
         if (message.type === "incoming") {
+          //wait for 1 sec
           return <div key={index}>{message.content}</div>;
         } else if (message.type === "outgoing") {
           return <div key={index} className="outgoing">{message.content}</div>;
