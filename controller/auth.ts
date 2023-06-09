@@ -5,7 +5,7 @@ import generateToken  from '../config/generateToken';
 
 export const signup = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { email, password } = req.body;
+    const { email, password,pic } = req.body;
     const existingUser = await User.findOne({ email });
     
     if (existingUser) {
@@ -14,7 +14,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction): P
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-    const createdUser = new User({ email, password: hash });
+    const createdUser = new User({ email, password: hash,pic });
     const user = await createdUser.save();
     
     if (user) {

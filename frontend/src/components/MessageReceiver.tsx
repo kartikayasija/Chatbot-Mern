@@ -8,9 +8,13 @@ const MessageReceiver: React.FC = () => {
   useEffect(() => {
     const socket = io("/socket.io");
     socket.emit("join chat");
+    let counter=0;
     socket.on("message", async (msg: string) => {
       if (msg !== "") {
-        addMessage({ content: msg, type: "incoming" });
+        counter++;
+        setTimeout(() => {
+          addMessage({content:msg, type:'incoming'})
+        }, counter*1000);
       }
     });
     return () => {

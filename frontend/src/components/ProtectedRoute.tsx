@@ -1,32 +1,35 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 type ReactChildrenProps = {
   children: React.ReactNode;
-}
+};
 
-const ProtectedRoute:React.FC<ReactChildrenProps> = ({children})=>{
+const ProtectedRoute: React.FC<ReactChildrenProps> = ({ children }) => {
   const Navigate = useNavigate();
-  const token = localStorage.getItem('token');
-
-  useEffect(()=>{
+  
+  useEffect(() => {
     (async () => {
-      try{
-        const response = await axios.post('/api/auth/verifyToken',null,{
-          headers:{
-            Authorization : `Bearer ${token}`
-          }
-        })
-        if(!response?.data?.valid) Navigate('/login');
-      } catch(err) {
-        Navigate('/login');
-        console.log(err)
+      try {
+        const userJSON = localStorage.getItem("user");
+        if(!userJSON) return Navigate('/login');
+
+        const user = JSON.parse(userJSON); 
+        const response = await axios.post("/api/auth/verifyToken", null, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        if (!response?.data?.valid) Navigate("/login");
+      } catch (err) {
+        Navigate("/login");
+        console.log(err);
       }
     })();
-  },[])
+  }, []);
 
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
 export default ProtectedRoute;

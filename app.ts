@@ -33,6 +33,7 @@ io.of("/socket.io").on("connection", async (socket) => {
   console.log("Connected to socket.io");
   
   socket.on("join chat", async () => {
+    
     socket.emit('message','Hello How are you?');
     socket.emit('message','Hello How are you?');
     socket.emit('message','Hello How are you?');
