@@ -1,11 +1,11 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { SketchPicker } from "react-color";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeDropper } from "@fortawesome/free-solid-svg-icons";
 import { ThemeContext } from "../context/ThemeContext";
 
 const ThemeButton: React.FC = () => {
-  const {setTheme,setCustomColor,customColor} = useContext(ThemeContext);
+  const { setTheme, setCustomColor, customColor } = useContext(ThemeContext);
   const [showPicker, setShowPicker] = useState(false);
 
   const handleTheme = (theme: string) => {
@@ -28,17 +28,18 @@ const ThemeButton: React.FC = () => {
       ></button>
       <button onClick={() => handleTheme("red")} data-theme="red"></button>
       <button onClick={() => handleTheme("blue")} data-theme="blue"></button>
-      <button
-        onClick={() => setShowPicker((prevState) => !prevState)}
-        style={{ position: "relative",}}
-      >
-        <FontAwesomeIcon icon={faEyeDropper} />
-      </button>
-      {showPicker && (
-        <div style={{ position: "absolute", top: "60px" }}>
-          <SketchPicker color={customColor} onChangeComplete={handleChange} />
-        </div>
-      )}
+      <div style={{position:'relative'}}>
+        <button
+          onClick={() => setShowPicker((prevState) => !prevState)}
+        >
+          <FontAwesomeIcon icon={faEyeDropper} />
+        </button>
+        {showPicker && (
+          <div style={{ position: "absolute", top: "40px",right:'0',zIndex:'1' }}>
+            <SketchPicker color={customColor} onChangeComplete={handleChange} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
