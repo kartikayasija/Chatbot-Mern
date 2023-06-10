@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { SketchPicker } from "react-color";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeDropper } from "@fortawesome/free-solid-svg-icons";
+import { ThemeContext } from "../context/ThemeContext";
 
-type Prop = {
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
-  setCustomColor: React.Dispatch<React.SetStateAction<string>>;
-  customColor: string;
-};
-
-const ThemeButton: React.FC<Prop> = ({
-  setTheme,
-  setCustomColor,
-  customColor,
-}) => {
+const ThemeButton: React.FC = () => {
+  const {setTheme,setCustomColor,customColor} = useContext(ThemeContext);
   const [showPicker, setShowPicker] = useState(false);
 
   const handleTheme = (theme: string) => {

@@ -18,7 +18,7 @@ const ChatBody: React.FC = () => {
   return (
     <div className="chat-body" ref={chatBodyRef}>
       <div className="incoming">
-        <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/4143764/325500_63061.png" />
+        <img src="https://acrorma.com/assets/images/24-h-img.png" />
       </div>
       {messages &&
         messages.map((message, index) => (
