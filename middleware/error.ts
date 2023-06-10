@@ -6,7 +6,6 @@ interface customError extends Error {
 
 
 const errorHandler = (err: customError, req: Request, res: Response, next: NextFunction): void => {
-  console.log(err)
   const statusCode: number = err.status || (res.statusCode===200 ? 500 : res.statusCode);
   // const errorMessage: string = err.message || 'Internal Server Error';
 

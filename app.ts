@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import path from 'path';
 import { connectToMongoDB } from "./config/db";
 import { Server, ServerOptions } from "socket.io";
 
@@ -14,9 +15,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRouter);
 
-app.get("/", (req: Request, res: Response) => {
-  res.json("Api Running");
-});
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (isProduction) {
+  app.use(express.static(path.join(__dirname, 'frontend/dist')));
+
+  app.get('*', (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
+  });
+} else {
+
+  app.get('/', (req: Request, res: Response) => {
+    res.send('Server running');
+  });
+}
 
 app.use(errorHandler);
 
