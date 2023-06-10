@@ -8,15 +8,18 @@ import Signup from "./pages/Signup";
 
 function App() {
   const [theme, setTheme] = useState<string>("default");
+  const [customColor, setCustomColor] = useState('');
   useEffect(() => {
     const newTheme = localStorage.getItem("theme");
     if (newTheme) setTheme(newTheme);
+    const color = localStorage.getItem('color');
+    if(color) setCustomColor(color);
   }, []);
 
   return (
-    <div className={`App ${theme}`}>
+    <div className={`App ${theme}`} style={customColor?{background: customColor}:undefined} >
       <Router>
-        <ThemeButton setTheme={setTheme} />
+        <ThemeButton setTheme={setTheme} setCustomColor={setCustomColor} customColor={customColor}/>
         <Routes>
           <Route path="/" element={<Chat />} />
           <Route path="/login" element={<Login />} />

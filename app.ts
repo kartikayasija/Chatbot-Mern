@@ -34,9 +34,20 @@ io.of("/socket.io").on("connection", async (socket) => {
   
   socket.on("join chat", async () => {
     
-    socket.emit('message','Hello How are you?');
-    socket.emit('message','Hello How are you?');
-    socket.emit('message','Hello How are you?');
+    const delay=100;
+
+    const messages = [
+      'Hello',
+      'Hello How are you?',
+      'Hello How are you?',
+      'Hello How are you?',
+    ];
+
+    for (let i = 0; i < messages.length; i++) {
+      setTimeout(() => {
+        socket.emit('message', messages[i]);
+      }, delay * (i + 1));
+    }
   });
 });
 

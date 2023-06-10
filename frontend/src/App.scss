@@ -6,14 +6,18 @@
   padding: 0;
 }
 .App {
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Poppins", sans-serif;
 }
 
 .default {
   background: linear-gradient(239.26deg, #ddeeed 63.17%, #fdf1e0 94.92%);
   .chat-body {
-    div {
+    .outgoing {
+      margin-left: auto;
+      background: rgb(194, 203, 255);
+    }
+    .incoming {
       background: #fff;
     }
   }
@@ -23,8 +27,12 @@
   background-color: #fbab7e;
   background-image: linear-gradient(62deg, #fbab7e 0%, #f7ce68 100%);
   .chat-body {
-    div {
-      background: #ffe299;
+    .outgoing {
+      margin-left: auto;
+      background: #fff;
+    }
+    .incoming {
+      background: rgb(255, 228, 185);
     }
   }
 }
@@ -32,8 +40,12 @@
   background-color: #7ea3fb;
   background-image: linear-gradient(62deg, #7ea3fb 50%, #6f68f7 90%);
   .chat-body {
-    div {
-      background: #bdc8ff;
+    .outgoing {
+      margin-left: auto;
+      background: rgb(211, 197, 242);
+    }
+    .incoming {
+      background: #ded9ff;
     }
   }
 }
@@ -41,8 +53,8 @@
 .chat-container {
   width: 40%;
   max-width: 500px;
-  margin: 2% auto;
-  border: 1px solid;
+  margin: 0 auto;
+  // border: 1px solid;
   height: 450px;
   display: block;
   border-radius: 10px;
@@ -65,28 +77,41 @@
     max-width: 150px;
     position: relative;
     font-size: 0.8rem;
-    background: #fff;
   }
-}
-
-.outgoing {
-  margin-left: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .incoming {
+    .last {
+      border-radius: 0 20px 20px 20px !important;
+    }
+  }
+  .outgoing {
+    .last {
+      border-radius: 0 20px 20px 20px !important;
+    }
+  }
 }
 
 .input {
   width: 100%;
   height: 30px;
   input {
+    border-radius: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.301);
     height: 100%;
     width: 100%;
+    padding: 0 25px;
   }
 }
 
 .theme-container {
   width: 80%;
   margin: auto;
-  text-align: right;
   padding-top: 20px;
+  display: flex;
+  justify-content: end;
+  gap: 5px;
   button {
     width: 30px;
     height: 30px;
@@ -108,9 +133,8 @@
   }
 }
 
-
 // Login Page
-.login{
+.login {
   height: 500px;
   width: 70%;
   margin: auto;
@@ -120,28 +144,30 @@
   overflow: hidden;
   display: flex;
   // background: white;
-  .form{
+  .form {
     width: 40%;
     padding: 20px;
     line-height: 1.8;
-    h1{
+    h1 {
       font-size: 3rem;
     }
-    p{
+    p {
       color: rgba(0, 0, 0, 0.324);
       font-weight: 400;
     }
-    form{
+    form {
       margin-top: 30px;
-      input{
-        margin: 20px 0;
-        height: 30px;
-        border: 1px solid #6f68f733;
-        border-radius: 5px;
-        padding: 5px;
+      input {
         display: block;
+        margin: 20px 0;
+        &:nth-child(-n + 2) {
+          height: 30px;
+          border: 1px solid #6f68f733;
+          border-radius: 5px;
+          padding: 15px;
+        }
       }
-      button{
+      button {
         display: block;
         width: 80px;
         height: 30px;
@@ -152,17 +178,54 @@
         margin-top: 50px;
         cursor: pointer;
       }
-      .link{
+      .link {
         font-size: 0.8rem;
         text-decoration: none;
       }
     }
   }
-  .vector{
+  .vector {
     width: 60%;
-    img{
+    img {
       width: 100%;
       height: 100%;
     }
   }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+    .form {
+      width: 100%;
+    }
+
+    .vector {
+      display: none;
+    }
+  }
+}
+
+.avatar {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  button {
+    width: 70px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.374);
+    transition: 0.3s ease all;
+    opacity: 0.7;
+    cursor: pointer;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.incoming-last {
+  border-radius: 0 20px 20px 20px !important;
+}
+.outgoing-last {
+  border-radius: 20px 0px 20px 20px !important;
 }

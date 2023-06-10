@@ -19,7 +19,7 @@ const Avatar:React.FC = ()=>{
   }
 
   return (
-    <div style={{marginLeft: '20px'}}>
+    <div className="avatar">
       <img src={user.pic} alt="user" width="50px" style={{borderRadius:'50%'}}/>
       <button onClick={handleClick}>Logout</button>
     </div>

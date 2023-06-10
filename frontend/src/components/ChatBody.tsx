@@ -6,10 +6,10 @@ const ChatBody: React.FC = () => {
 
   return (
     <div className="chat-body">
-      {messages.map((message, index) => (
+      {messages && messages.map((message, index) => (
         <div
           key={index}
-          className={message.type === "outgoing" ? "outgoing" : ""}
+          className={message.type === "outgoing" ? "outgoing" : "incoming"}
         >
           {message.content}
         </div>
