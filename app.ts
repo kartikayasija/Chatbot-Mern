@@ -37,17 +37,17 @@ io.of("/socket.io").on("connection", async (socket) => {
     const delay=100;
 
     const messages = [
-      'Hello',
-      'Hello How are you?',
-      'Hello How are you?',
-      'Hello How are you?',
+      'Hi there! 👋',
+      "I'm Wysa - an AI chatbot built by therapists.",
+      'I am here to understand your concerns and connect you with the best resources avialable to support you.',
+      'Can I Help?',
     ];
 
-    for (let i = 0; i < messages.length; i++) {
+    messages.forEach((message,index)=> {
       setTimeout(() => {
-        socket.emit('message', messages[i]);
-      }, delay * (i + 1));
-    }
+        socket.emit('message', message);
+      }, delay * (index + 1));
+    })
   });
 });
 

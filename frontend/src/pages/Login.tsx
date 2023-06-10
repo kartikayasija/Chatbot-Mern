@@ -1,48 +1,62 @@
-import { useState,FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+interface InputState {
+  email: string;
+  password: string;
+}
+
 const Login: React.FC = () => {
-  const [input, setInput] = useState<object>({});
+  const [input, setInput] = useState<InputState>({
+    email: "abc@gmail.com",
+    password: "abc123",
+  });
   const Navigate = useNavigate();
 
-  const handleSubmit = async(e:FormEvent<HTMLFormElement>)=>{
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.stopPropagation();
     e.preventDefault();
-    try{
-      const response = await axios.post('/api/auth/login',input);
+    try {
+      const response = await axios.post("/api/auth/login", input);
       const user = response?.data;
-      localStorage.setItem('user',JSON.stringify(user));
-      Navigate('/');
-    } catch(err:any) {
-      const error = err?.response?.data?.message; 
+      localStorage.setItem("user", JSON.stringify(user));
+      Navigate("/");
+    } catch (err: any) {
+      const error = err?.response?.data?.message;
       alert(error);
     }
-  }
+  };
 
   return (
-    <div className="login">
+    <div className="auth">
       <div className="form">
         <h1>Login.</h1>
         <p>Log in to your account</p>
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
+            type="email"
             name="email"
             placeholder="Enter your Email"
+            required
+            value={input.email}
             onChange={(e) =>
               setInput({ ...input, [e.target.name]: e.target.value })
             }
           />
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="Enter your password"
+            required
+            value={input.password}
             onChange={(e) =>
               setInput({ ...input, [e.target.name]: e.target.value })
             }
-            />
-            <Link to='/signup' className="link">Create Your Account</Link>
+          />
+          <Link to="/signup" className="link">
+            Create Your Account
+          </Link>
           <button type="submit">Login</button>
         </form>
       </div>

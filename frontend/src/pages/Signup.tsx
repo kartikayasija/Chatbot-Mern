@@ -39,19 +39,19 @@ const Signup: React.FC = () => {
       } catch(err){
         setLoading(false);
         throw err;
-        
       }
     }
   }
 
   return (
-    <div className="login">
+    <div className="auth">
       <div className="form">
         <h1>Signup.</h1>
         <p>Create your account</p>
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
+            type="email"
+            required
             name="email"
             placeholder="Enter your Email"
             onChange={(e) =>
@@ -59,7 +59,8 @@ const Signup: React.FC = () => {
             }
           />
           <input
-            type="text"
+            type="password"
+            required
             name="password"
             placeholder="Enter your password"
             onChange={(e) =>
@@ -68,7 +69,7 @@ const Signup: React.FC = () => {
             />
             <input type="file" accept="image/*" onChange={handleImg}/>
             <Link to='/login' className="link">Already have an Accout?</Link>
-          <button type="submit">{loading?'Loading':'Signup'}</button>
+          <button type="submit" disabled={loading} style={{ opacity: loading ? 0.5 : 1 }}>{loading?'Loading':'Signup'}</button>
         </form>
       </div>
       <div className="vector">
